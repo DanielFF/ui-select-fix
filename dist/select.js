@@ -605,7 +605,15 @@ uis.controller('uiSelectCtrl',
           if (inputWidth < 50) inputWidth = containerWidth;
           ctrl.searchInput.css('width', inputWidth+'px');
           return true;
+        },
+        mouseOverListener = function(e) {
+          updateIfVisible(calculateContainerWidth());
+          e.target.removeEventListener(e.type, mouseOverListener, false);
         };
+
+    if(container) {
+      container.addEventListener('mouseover', mouseOverListener, false);
+    }
 
     ctrl.searchInput.css('width', '10px');
     $timeout(function() { //Give tags time to render correctly
